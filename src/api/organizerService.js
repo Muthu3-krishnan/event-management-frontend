@@ -7,15 +7,11 @@ export const getAllOrganizers = () => {
 };
 
 export const createOrganizer = (organizer) => {
-  return axios.post(
-    BASE_URL,
-    organizer,
-    {
-      headers: {
-        "Content-Type": "application/json"
-      }
+  return axios.post(BASE_URL, organizer, {
+    headers: {
+      "Content-Type": "application/json"
     }
-  );
+  });
 };
 
 export const deleteOrganizer = (id) => {
