@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "https://event-management-backend-xm3l.onrender.com/attendee";
+const BASE_URL = "https://event-management-backend-xm3l.onrender.com/venue";
 
 export const getAllVenues = () => {
   return axios.get(BASE_URL);
