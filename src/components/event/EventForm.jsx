@@ -18,11 +18,15 @@ function EventForm() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get("http://localhost:8080/venue")
-      .then(res => setVenues(res.data.data));
+    axios
+      .get("https://event-management-backend-xm3l.onrender.com/venue")
+      .then((res) => setVenues(res.data.data))
+      .catch((err) => console.error("Venue load error:", err));
 
-    axios.get("http://localhost:8080/organizer")
-      .then(res => setOrganizers(res.data.data));
+    axios
+      .get("https://event-management-backend-xm3l.onrender.com/organizer")
+      .then((res) => setOrganizers(res.data.data))
+      .catch((err) => console.error("Organizer load error:", err));
   }, []);
 
   const handleChange = (e) => {
@@ -45,7 +49,7 @@ function EventForm() {
 
     createEvent(payload)
       .then(() => navigate("/events"))
-      .catch(err => console.error(err));
+      .catch((err) => console.error("Create event error:", err));
   };
 
   return (
@@ -53,21 +57,52 @@ function EventForm() {
       <h2>Create Event</h2>
 
       <form onSubmit={handleSubmit}>
-        <input name="title" placeholder="Title" onChange={handleChange} required />
-        <input type="date" name="eventDate" onChange={handleChange} required />
-        <textarea name="description" placeholder="Description" onChange={handleChange} required />
+        <input
+          name="title"
+          placeholder="Title"
+          onChange={handleChange}
+          required
+        />
 
-        <select name="venueId" onChange={handleChange} required>
+        <input
+          type="date"
+          name="eventDate"
+          onChange={handleChange}
+          required
+        />
+
+        <textarea
+          name="description"
+          placeholder="Description"
+          onChange={handleChange}
+          required
+        />
+
+        <select
+          name="venueId"
+          value={event.venueId}
+          onChange={handleChange}
+          required
+        >
           <option value="">Select Venue</option>
-          {venues.map(v => (
-            <option key={v.id} value={v.id}>{v.name}</option>
+          {venues.map((v) => (
+            <option key={v.id} value={v.id}>
+              {v.name}
+            </option>
           ))}
         </select>
 
-        <select name="organizerId" onChange={handleChange} required>
+        <select
+          name="organizerId"
+          value={event.organizerId}
+          onChange={handleChange}
+          required
+        >
           <option value="">Select Organizer</option>
-          {organizers.map(o => (
-            <option key={o.id} value={o.id}>{o.name}</option>
+          {organizers.map((o) => (
+            <option key={o.id} value={o.id}>
+              {o.name}
+            </option>
           ))}
         </select>
 
